@@ -140,20 +140,46 @@
   </section>
   <p>Scroll to view timeline | Hover over cards to learn more!</p>
 
-  <!-- JavaScript for horizontal scroll with mouse wheel -->
+  <!-- JavaScript for horizontal scroll with mouse wheel and card click interactions -->
   <script>
     // Get the timeline section element
     const section = document.querySelector('section');
 
     // Add event listener for mouse wheel scroll
     section.addEventListener('wheel', function(event) {
-      // Prevent default vertical scrolling
-      event.preventDefault();
-      
-      // Scroll horizontally instead with increased speed
-      // deltaY is the vertical scroll amount from the mouse wheel
-      // Multiply by 2.5 for faster scrolling
-      section.scrollLeft += event.deltaY * 2.5;
+      // Only apply horizontal scrolling on desktop (larger screens)
+      // Check if the screen is wide enough for horizontal scrolling
+      if (window.innerWidth > 768) {
+        // Prevent default vertical scrolling on desktop
+        event.preventDefault();
+        
+        // Scroll horizontally instead with increased speed
+        // deltaY is the vertical scroll amount from the mouse wheel
+        // Multiply by 2.5 for faster scrolling
+        section.scrollLeft += event.deltaY * 2.5;
+      }
+      // On mobile/tablet (768px and below), allow normal vertical scrolling
+    });
+
+    // Handle click interactions for showing/hiding card text on all screen sizes
+    // Get all cards (divs inside the section)
+    const cards = document.querySelectorAll('section > div');
+
+    // Add click listener to each card
+    cards.forEach(card => {
+      card.addEventListener('click', function() {
+        // Toggle 'clicked' class on the current card to show/hide text
+        card.classList.toggle('clicked');
+        
+        // On mobile/tablet, also deselect other cards so only one shows text at a time
+        if (window.innerWidth <= 768) {
+          cards.forEach(otherCard => {
+            if (otherCard !== card) {
+              otherCard.classList.remove('clicked');
+            }
+          });
+        }
+      });
     });
   </script>
 </body>
