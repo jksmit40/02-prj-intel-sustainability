@@ -140,25 +140,21 @@
   </section>
   <p>Scroll to view timeline | Hover over cards to learn more!</p>
 
-  <!-- JavaScript for horizontal scroll with mouse wheel and card click interactions -->
+  <!-- JavaScript for card interactions and horizontal scrolling -->
   <script>
     // Get the timeline section element
     const section = document.querySelector('section');
 
-    // Add event listener for mouse wheel scroll
+    // Add event listener for mouse wheel scroll on desktop
     section.addEventListener('wheel', function(event) {
       // Only apply horizontal scrolling on desktop (larger screens)
-      // Check if the screen is wide enough for horizontal scrolling
       if (window.innerWidth > 768) {
-        // Prevent default vertical scrolling on desktop
+        // Prevent default vertical scrolling
         event.preventDefault();
         
-        // Scroll horizontally instead with increased speed
-        // deltaY is the vertical scroll amount from the mouse wheel
-        // Multiply by 2.5 for faster scrolling
+        // Scroll horizontally
         section.scrollLeft += event.deltaY * 2.5;
       }
-      // On mobile/tablet (768px and below), allow normal vertical scrolling
     });
 
     // Handle click interactions for showing/hiding card text on all screen sizes

@@ -259,6 +259,7 @@ body > p {
     /* Hide scrollbar while keeping scrolling functionality */
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+    scroll-snap-type: y proximity;
   }
 
   /* Hide scrollbar for Chrome, Safari and Opera */
